@@ -3,14 +3,17 @@ import { AppComponent } from './app.component';
 import {IssueListComponent} from './components/issue-list/issue-list.component';
 import {ExcerptPipe} from './pipes/excerpt.pipe';
 import {MarkdownToHtmlPipe} from 'markdown-to-html-pipe';
-import {BsModalService, ComponentLoaderFactory, PositioningService} from 'ngx-bootstrap';
+import {AlertModule, BsModalService, ComponentLoaderFactory, PositioningService} from 'ngx-bootstrap';
 import {GitHubAngularIssuesService} from './services/git-hub-angular-issues.service';
 import {HttpClientTestingModule} from '@angular/common/http/testing';
+import {FormsModule} from '@angular/forms';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
+      imports: [HttpClientTestingModule,
+      FormsModule,
+      AlertModule.forRoot()],
       declarations: [
         AppComponent,
         IssueListComponent,
