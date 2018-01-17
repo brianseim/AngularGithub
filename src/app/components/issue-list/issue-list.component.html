@@ -1,18 +1,56 @@
+<div class="row">
+  <div class="col-sm-4"><p>This is a list of the latest issues with Angular.<br/>It is limited to the last 7 days.</p></div>
+
+<div class="col-sm-8 text-right">
+  <!--Make this into a separate component that emits the page changes and duplicate at the bottom of the page-->
+
+  <form class="form-inline"><label for="pageSize">Issues per page:</label> <select id="pageSize" name="pageSize" [(ngModel)]="pageSize" (change)="getIssues(1)" class="form-control">
+    <option value="5">5</option>
+    <option value="10">10</option>
+    <option value="25">25</option>
+    <option value="100">100</option>
+  </select>
+  Page {{currentPage}} of {{totalPages}} :
+  <div class="btn-group" role="group">
+    <button *ngIf="currentPage>1" type="button" class="btn btn-default" (click)="getIssues(1)">First</button>
+    <button *ngFor="let page of pageRange" type="button" class="btn btn-default" [ngClass]="{'btn-success': (currentPage==page)}" (click)="getIssues(page)">{{page}}</button>
+    <button *ngIf="currentPage<totalPages" type="button" class="btn btn-default" (click)="getIssues(totalPages)">Last</button>
+  </div>
+  <div class="btn-group" role="group">
+    <button *ngIf="currentPage>1" type="button" class="btn btn-default" (click)="getIssues(currentPage-1)">Prev</button>
+    <button *ngIf="currentPage<totalPages" type="button" class="btn btn-default" (click)="getIssues(currentPage+1)">Next</button>
+  </div></form>
+</div>
+</div>
+<div class="row" *ngIf="statusMessage">
+  <div class="col-xs-12">
+    <alert type="danger" ><strong>Error:</strong> {{statusMessage}}</alert>
+
+  </div>
+</div>
 <table class="table table-striped">
   <thead>
   <tr>
+    <th>User</th>
     <th>Title</th>
     <th>Body</th>
-    <th>User</th>
     <th>Assignee</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let issue of issues">
-    <td>{{issue.title}} {{issue.created_at}}</td>
-    <td>{{issue.body|excerpt}} <button (click)="showMarkup(issue, template)" class="btn btn-xs btn-default pull-right">More</button></td>
-    <td>{{issue.user?.login}}</td>
-    <td>{{issue.assignee?.login}}</td>
+    <td>
+      <img *ngIf="issue.user?.avatar_url" src="{{issue.user.avatar_url}}" width="100px" />
+      {{issue.user.login}}
+    </td>
+    <td>{{issue.title}}<br/>created: {{issue.created_at | date:"M/dd/yy h:mm a"}}</td>
+    <td>{{issue.body|excerpt}}
+      <button (click)="showMarkup(issue, template)" class="btn btn-xs btn-default pull-right">More</button>
+    </td>
+    <td>
+      <img *ngIf="issue.assignee?.avatar_url" src="{{issue.assignee.avatar_url}}" width="100px" />
+      {{issue.assignee?.login}}
+    </td>
   </tr>
   </tbody>
 </table>

@@ -1,16 +1,17 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
-
 import { AppComponent } from './app.component';
-import { GitHubAngularIssuesService } from './services/git-hub-angular-issues.service';
-import { HttpClientModule } from '@angular/common/http';
+import { IssueListComponent } from './components/issue-list/issue-list.component';
+
 import { MarkdownToHtmlModule } from 'markdown-to-html-pipe';
 import { ExcerptPipe } from './pipes/excerpt.pipe';
-import { ModalModule } from 'ngx-bootstrap';
-import { IssueListComponent } from './components/issue-list/issue-list.component';
-// import {AlertModule} from 'ngx-bootstrap';
-// https://www.npmjs.com/package/ngx-bootstrap
+
+import { GitHubAngularIssuesService } from './services/git-hub-angular-issues.service';
+import { HttpClientModule } from '@angular/common/http';
+import { AlertModule, ModalModule, PopoverModule} from 'ngx-bootstrap';
+import {FormsModule} from '@angular/forms';
+
 
 @NgModule({
   declarations: [
@@ -23,7 +24,10 @@ import { IssueListComponent } from './components/issue-list/issue-list.component
     BrowserModule,
     HttpClientModule,
     MarkdownToHtmlModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    PopoverModule.forRoot(),
+    AlertModule.forRoot(),
+    FormsModule
   ],
   providers: [GitHubAngularIssuesService ],
   bootstrap: [AppComponent]
