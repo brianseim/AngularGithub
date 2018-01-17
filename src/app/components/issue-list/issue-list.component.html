@@ -1,0 +1,28 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+    <th>Title</th>
+    <th>Body</th>
+    <th>User</th>
+    <th>Assignee</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let issue of issues">
+    <td>{{issue.title}} {{issue.created_at}}</td>
+    <td>{{issue.body|excerpt}} <button (click)="showMarkup(issue, template)" class="btn btn-xs btn-default pull-right">More</button></td>
+    <td>{{issue.user?.login}}</td>
+    <td>{{issue.assignee?.login}}</td>
+  </tr>
+  </tbody>
+</table>
+
+<ng-template #template>
+  <div class="modal-header">
+    <h4 class="modal-title pull-left">Complete Body Markdown</h4>
+    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body" [innerHtml]="currentIssue.body|MarkdownToHtml"></div>
+</ng-template>

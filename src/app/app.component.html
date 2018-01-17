@@ -6,32 +6,5 @@
   <img width="150px" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
 </div>
 <div class="container-fluid">
-  <table class="table table-striped">
-    <thead>
-    <tr>
-      <th>Title</th>
-      <th>Body</th>
-      <th>User</th>
-      <th>Assignee</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let issue of issues">
-      <td>{{issue.title}} {{issue.created_at}}</td>
-      <td>{{issue.body|excerpt}} <button (click)="showMarkup(issue, template)" class="btn btn-xs btn-default pull-right">More</button></td>
-      <td>{{issue.user?.login}}</td>
-      <td>{{issue.assignee?.login}}</td>
-    </tr>
-    </tbody>
-  </table>
+  <app-issue-list></app-issue-list>
 </div>
-
-<ng-template #template>
-  <div class="modal-header">
-    <h4 class="modal-title pull-left">Complete Body Markdown</h4>
-    <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
-      <span aria-hidden="true">&times;</span>
-    </button>
-  </div>
-  <div class="modal-body" [innerHtml]="currentIssue.body|MarkdownToHtml"></div>
-</ng-template>

@@ -1,8 +1,8 @@
-import { ExerptPipe } from './excerpt.pipe';
+import {ExcerptPipe} from './excerpt.pipe';
 
-describe('ExerptPipe', () => {
+describe('ExcerptPipe', () => {
   it('create an instance', () => {
-    const pipe = new ExerptPipe();
+    const pipe = new ExcerptPipe();
     expect(pipe).toBeTruthy();
   });
 });
